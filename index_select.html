@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>css menu/selection</title>
+
+		<script src="js/jquery-2.0.3.min.js"></script>
+		<script src="js/module.js"></script>
+	</head>
+
+	<body>
+		<div id="switch">
+			<a href="#bentley">bentley</a>
+			<a href="#gis">gis</a>
+			<a href="#documentum">documentum</a>
+		</div>
+	</body>
+
+	<script>
+
+		$(document).ready(function() {
+		    // get hash
+		    var hash = window.location.hash;
+		    // console.log('hash', hash);
+
+		    if (!hash) {
+				hash = '#bentley';
+				window.location.hash = hash
+		    }
+
+		    // get the href based on hash
+		    var href = $("#switch a[href='" + hash +"']").first()
+
+		    // css switch based on hash/href
+		    $('#switch a').removeClass('selected');
+		    href.addClass('selected');
+
+		    // logic based on initial selection:
+		    console.log('initial href', href.attr("href"));
+		    Module.getModuleData(href.attr("href"));
+		});
+
+		$('#switch a').click(function(){
+			$('#switch a').removeClass('selected');
+  			$(this).addClass('selected');
+
+			// logic based on clicked selection:
+  			var href = $(this).attr('href');
+  			console.log('clicked href', href);
+  			Module.getModuleData(href);
+		}); 		
+	</script>
+
+	<style>
+		a:link {
+			text-decoration: none;
+			font-size: 24px;
+			color: #1d69b1;
+			margin: 5px;
+		}
+
+		a:hover {
+			border-bottom: 5px solid #1d69b1;
+		}
+
+		a:active {}
+		a:visited {}		
+
+		.selected {
+			color: orangered;
+			border-bottom: 5px solid orangered;
+		}
+	</style>
+</html>

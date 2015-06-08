@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Mastering the Module Pattern</title>
+		<script src="js/jquery-2.0.3.min.js"></script>
+	</head>
+
+	<body>
+		<div>
+
+		</div>
+	</body>
+
+	<script>
+		$(document).ready(function() {
+			console.log('on document ready');
+			// http://toddmotto.com/mastering-the-module-pattern/
+			
+			Module.someMethod();
+			Module.extension();
+		});
+
+		// Revealing Module Pattern
+		var Module = (function () {
+
+		  var _privateMethod  = function () {
+		    // private
+		  };
+
+		  var someMethod = function () {
+		    // public
+		    console.log('someMethod');
+		  };
+
+		  var anotherMethod = function () {
+		    // public
+		  };
+		  
+		  return {
+		    someMethod: someMethod,
+		    anotherMethod: anotherMethod
+		  };
+
+		})();
+
+		
+		// Augmenting Modules
+		// Module gets passed into ModuleTwo, an extension method is added and then returned again
+		// Our Object is getting thrown about, but that's the flexibility of JavaScript :D
+		var ModuleTwo = (function (Module) {
+		    
+		    Module.extension = function () {
+		        console.log('extension');
+		    };
+
+		    Module.someMethod = function () {
+		        console.log('someMethod overridden');
+		    };
+
+		    return Module;
+		    
+		})(Module || {});	
+
+
+	</script>
+	<style>
+	</style>
+</html>

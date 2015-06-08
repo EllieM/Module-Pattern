@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Mastering the Module Pattern</title>
+		<script src="js/jquery-2.0.3.min.js"></script>
+	</head>
+
+	<body>
+		<div>
+
+		</div>
+	</body>
+
+	<script>
+		$(document).ready(function() {
+			// http://toddmotto.com/mastering-the-module-pattern/
+			
+			console.log('on document ready');
+			Module.publicMethod();
+		});
+
+
+		//--------------------------------------------------------------------------
+		(function() {
+			console.log('self-invoking anonymous function');
+			// Creates new scope and creates "privacy".
+			// The idea then is to return only the parts we need, leaving the other code out of the global scope
+		})();
+
+		
+		//--------------------------------------------------------------------------
+		// Namespace for our anonymous Module
+		// We then have Module declared in the global scope, which means we can call it wherever we like, and even pass it into another Module.
+		var Module = (function () {
+
+			  var privateMethod = function () {
+				  console.log('privateMethod');
+			  };			
+
+
+			  // returning an Object with a function as a property
+			  return {
+			    publicMethod: function () {
+				    console.log('publicMethod');
+				    privateMethod();
+			    }
+			  };			  
+		  
+		})();
+
+		//--------------------------------------------------------------------------
+		// Object Literal 
+		// But the issue with Object Literals is we can abuse the pattern and bolt "private" methods onto it, 
+		// which as they're part of the Object, will be accessible too.
+		
+		var myObjLiteral = {
+		  defaults: { name: 'Todd' },
+		  someMethod: function () {
+		    console.log(this.defaults);
+		  }
+		};
+
+		// console.log: Object { name: 'Todd' }
+		myObjLiteral.someMethod();
+		//--------------------------------------------------------------------------
+
+
+	</script>
+	<style>
+	</style>
+</html>

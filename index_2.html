@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Mastering the Module Pattern</title>
+		<script src="js/jquery-2.0.3.min.js"></script>
+	</head>
+
+	<body>
+		<div>
+
+		</div>
+	</body>
+
+	<script>
+		$(document).ready(function() {
+			console.log('on document ready');
+			// http://toddmotto.com/mastering-the-module-pattern/
+			
+			Module.someMethod();
+			Module.publicMethod('Hello!');
+		});
+
+		// Revealing Module Pattern
+		var Module = (function () {
+
+		  var privateMethod = function (message) {
+		  	  console.log(message);
+		  };
+
+		  var publicMethod = function (text) {
+			  privateMethod(text);
+		  };
+
+		  var someMethod = function () {
+		    // public
+		    console.log('someMethod');
+		  };
+
+		  var anotherMethod = function () {
+		    // public
+		  };
+		  
+		  return {
+		    publicMethod: publicMethod,
+		    someMethod: someMethod,
+		    anotherMethod: anotherMethod
+		  };
+
+		})();
+
+
+		// You're not just limited to methods, though. You've access to Objects, Arrays, anything:
+
+		var Module_1 = (function () {
+
+		  var privateArray = [];
+
+		  var publicMethod = function (somethingOfInterest) {
+		    privateArray.push(somethingOfInterest);
+		  };
+		  
+		  return {
+		    publicMethod: publicMethod
+		  };
+
+		})();
+
+
+	</script>
+	<style>
+	</style>
+</html>
