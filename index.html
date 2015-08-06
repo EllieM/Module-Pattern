@@ -15,7 +15,6 @@
 
 	<script>
 		$(document).ready(function() {
-			// http://toddmotto.com/mastering-the-module-pattern/
 			
 			console.log('on document ready');
 			Module.publicMethod();
@@ -56,13 +55,13 @@
 		// which as they're part of the Object, will be accessible too.
 		
 		var myObjLiteral = {
-		  defaults: { name: 'Todd' },
+		  defaults: { name: 'El' },
 		  someMethod: function () {
 		    console.log(this.defaults);
 		  }
 		};
 
-		// console.log: Object { name: 'Todd' }
+		// console.log: Object { name: 'El' }
 		myObjLiteral.someMethod();
 		//--------------------------------------------------------------------------
 
