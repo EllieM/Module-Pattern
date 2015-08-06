@@ -15,7 +15,6 @@
 
 	<script>
 		$(document).ready(function() {
-			// http://toddmotto.com/mastering-the-module-pattern/
 			console.log('on document ready');
 
 			Module.publicMethodOne();
@@ -32,7 +31,6 @@
 		  
 		  return {
 			    publicMethodOne: function () {
-			      	// I can call `privateMethod()` you know...
 			      	privateMethod();
 					console.log('publicMethodOne');
 			    },
